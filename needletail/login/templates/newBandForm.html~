@@ -1,0 +1,16 @@
+<html>
+<head><title>Band Info</title></head>
+
+<body>
+<h1>Create A Band</h1>
+
+  <div id = "band_info">
+    <form action = '' method = "post">
+      {{ form.as_p }}
+      <input type = "submit" value = "Register">
+    </form>
+  </div>			
+
+</body>
+
+</html>

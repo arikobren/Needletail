@@ -1,0 +1,29 @@
+<html>
+<head><title>Needletail</title><head>
+
+<body>
+<h1>Homepage</h1>
+<div id = "login">
+  <form  action = "" method = "post">
+    {{ form.as_p }}
+    <input type = "submit" value = "Login"
+  </form>
+</div>
+
+<div id = "create">
+  <form action = "./newBand/">
+     <input type   = "submit"   value  = "Create!">
+  </form>
+</div>
+
+<div id = "bands">
+  <h2> Current Bands </h2>
+  <ul>
+    {% for band in bands %}
+       <li>{{band.name}}</li>
+    {% endfor %}
+  </ul>
+</div>
+
+</body>
+</html>

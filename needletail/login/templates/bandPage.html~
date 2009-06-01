@@ -1,0 +1,11 @@
+<html>
+<head><title>Your Band's Page</title></head>
+
+<body>
+
+<h1>This is Your Band's Page Blah {{name}}</h1>
+
+
+</body>
+
+</html>

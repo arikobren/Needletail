@@ -1,0 +1,96 @@
+from django.shortcuts import render_to_response
+from django.http      import HttpResponse
+from django.http      import HttpResponseRedirect
+from django.contrib   import auth
+
+from django.contrib.auth.models import User
+
+from needletail.login.models import Band
+from needletail.login.models import User_Profile
+
+from needletail.login.forms  import NewBandForm
+from needletail.login.forms  import SignUpForm
+from needletail.login.forms  import LoginForm
+
+
+def home(request):
+    bands = Band.objects.all()
+    if request.method == 'POST':                  #form has been submitted
+                                                  #make sure user is browsing
+        if request.session.test_cookie_worked():  #with cookies enabled
+            request.session.delete_test_cookie()
+            form = LoginForm(request.POST)
+            if form.is_valid():
+                cd = form.cleaned_data
+                return HttpResponseRedirect('/bandPage/')
+        else:
+            return HttpResponse("Please enable cookies and try again")
+
+    else:
+        form = LoginForm()                        #form has not been submitted
+    return render_to_response('home.html', {'bands':bands, 'form':form})
+
+
+def new_band(request):
+    if request.method == 'POST':                 #if form has been submitted
+        form = NewBandForm(request.POST)
+        if form.is_valid():                       
+            cd = form.cleaned_data
+            new_band = Band(name = cd['band_name'])
+            new_band.save()
+            
+            #save members
+            member   = User(first_name = cd['first_name'],
+                            last_name  = cd['last_name' ],
+                            username   = cd['username'  ],
+                            password   = cd['password'  ],
+                            email      = cd['email'     ])
+            
+            
+            member.save()
+            
+            
+            return HttpResponseRedirect('/Success/')
+
+    else:
+        form = NewBandForm()                       #form has not been submitted
+    return render_to_response('newBandForm.html', {'form': form})
+
+
+def new_band_success(request):
+    return render_to_response('createSuccess.html')
+
+
+def band_page(request):
+    return render_to_response('bandPage.html', {'usr':usr})
+
+
+
+############BACKUP from 5.28.09################
+#def new_band(request):
+ #   if request.method == 'POST':                 #if form has been submitted
+  #      form = NewBandForm(request.POST)
+   #     if form.is_valid():                       
+    #        cd = form.cleaned_data
+     #       
+      #      new_band = Band(name = cd['band_name'])
+       #     new_band.save()
+        #    
+         #   #save members
+          #  member   = Band_Member(first_name = cd['first_name'],
+          #                         last_name  = cd['last_name' ],
+          #                         username   = cd['username'  ],
+          #                         password   = cd['password'  ],
+          #                         email      = cd['email'     ])
+          #
+            
+#            member.save()
+ #           member.groups.add(new_band)        #add the band that they are 
+  #                                                #part of to Band_Member
+   #         
+    #        
+     #       return HttpResponseRedirect('/Success/')
+#
+ #   else:
+  #      form = NewBandForm()                       #form has not been submitted
+   # return render_to_response('newBandForm.html', {'form': form})
