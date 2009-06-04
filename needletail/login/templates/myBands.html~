@@ -1,0 +1,24 @@
+<html>
+<head><title>My Bands</title></head>
+
+<body>
+
+<h1> My Bands </h1>
+
+<ul>
+{% for band in bands %}
+<li>
+  {{ band.name }}
+  <form action = "http://127.0.0.1:8000/bands/{{ band.name }}" method="POST">
+    <input type = submit value = "Go">
+  </form>
+</li>
+{% endfor %}
+</ul>
+
+
+
+</body>
+
+
+</html>

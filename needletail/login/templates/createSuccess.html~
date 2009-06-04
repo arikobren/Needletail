@@ -5,7 +5,7 @@
 
 
 
-<h1>Congradulations {{name}}! Your band was created successfully</h1>
+<h1>Your band was created successfully</h1>
 
 <div id = "back">
   <form    action = "../">

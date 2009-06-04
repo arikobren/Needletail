@@ -1,0 +1,14 @@
+<html>
+<head><title>Name your webpage</title></head>
+
+<body>
+
+<h1>hi</h1>
+
+
+
+{{ form.as_p }}
+
+
+</body>
+</html>

@@ -4,18 +4,14 @@
 <body>
 <h1>Homepage</h1>
 <div id = "login">
-  <form  action = "./bandPage/" method = "post">
-    Username:
-    <input type   = "text"     name   = "username">
-    <br/>
-    Password :
-    <input type   = "password" name   = "password">
-    <input type   = "submit"   value  = "Login">
+  <form  action = "" method = "post">
+    {{ form.as_p }}
+    <input type = "submit" value = "Login"
   </form>
 </div>
 
 <div id = "create">
-  <form action = "./newBand/" method = "post">
+  <form action = "./newBand/">
      <input type   = "submit"   value  = "Create!">
   </form>
 </div>

@@ -5,10 +5,10 @@ from django.contrib.auth.models import User
 
 class Band(models.Model):
     name     = models.CharField(max_length = 500)
-    genre    = models.CharField(max_length = 50 ) 
     location = models.CharField(max_length = 200)
-    bio      = models.CharField()
-
+    bio      = models.CharField(max_length = 500)
+    genre    = models.CharField(max_length = 50 ) 
+    web_ext  = models.CharField(max_length = 50 )
 
 class User_Profile(models.Model):
     user  = models.OneToOneField(User)

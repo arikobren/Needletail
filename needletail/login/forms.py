@@ -3,7 +3,7 @@ from django import forms
 from django.contrib.auth.models import User
 
 #from needletail.login.models import Band_Member
-
+from needletail.login.models import Band
 
 class LoginForm(forms.Form):
     band_name = forms.CharField()
@@ -11,23 +11,6 @@ class LoginForm(forms.Form):
     password  = forms.CharField(widget = forms.PasswordInput(render_value=
                                                              False))
 
-
-#    def clean_password(self):
-#        band = self.cleaned_data['band_name']
-#        usr  = self.cleaned_data['username' ]
-#        pswd = self.cleaned_data['password' ]
-
-#        try:
-#            q = Band_Member.objects.get(username = usr)
-#        except Band_Member.DoesNotExist:
-#            raise forms.ValidationError("Incorrect username, password," + 
- #                                       " and/or band name")
-
-#        if q.password == pswd:
-#            return pswd
-#        else:
-#            raise forms.ValidationError("Incorrect username, password," + 
-#                                        " and/or band name")
 
 class NewBandForm(forms.Form):
     band_name  = forms.CharField()
@@ -63,3 +46,18 @@ class NewBandForm(forms.Form):
             return
         else:
             raise forms.ValidationError("Password Confirmation does not match")
+
+
+class CreateWebsiteForm(forms.Form):
+    web_ext = forms.CharField()
+
+    def clean_web_ext(self):
+        w = self.cleaned_data['web_ext']
+        try:
+            w = Band.objects.get(web_ext = w)
+            raise forms.ValidationError("Sorry, that web extension already "
+                                        "exists. Please choose another.")
+        except Band.DoesNotExist:
+            return w
+
+                                   

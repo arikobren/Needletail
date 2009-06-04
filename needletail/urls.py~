@@ -8,11 +8,13 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
 
-    (r'^login/$'   , views.login),                 # login page
+    #(r'^login/$'   , views.login),                 # login page
     (r'^$'         , views.home),                  # home page        
     (r'^newBand/$' , views.new_band),              # create new band
-    (r'^Success/$' , views.new_band_success),      # creation successful  
-    (r'^bandPage/$', views.band_page),             # upon successful login
+    (r'^Success/$' , views.new_band_success),      # creation successful
+    (r'^WebExt/$ ' , views.create_website),        # choose your ext name 
+    (r'^MyBands/$' , views.choose_band),           # choose band if multiple  
+    (r'^bands/'    , views.band_page),             # upon successful login
     # Example:
     # (r'^needletail/', include('needletail.foo.urls')),
 
